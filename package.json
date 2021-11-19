@@ -1,0 +1,22 @@
+{
+  "name": "telegram-bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "module": "main.js",
+  "scripts": {
+    "start": "nodemon -r esm main.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "dotenv": "^10.0.0",
+    "esm": "^3.2.25",
+    "node-schedule": "^2.0.0",
+    "nodemon": "^2.0.15",
+    "telegraf": "^4.4.2",
+    "telegram-keyboard": "^2.2.8"
+  }
+}
