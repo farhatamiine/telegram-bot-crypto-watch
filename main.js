@@ -16,11 +16,26 @@ const bot = new Telegraf(process.env.telegram_token);
 bot.start((ctx) => ctx.reply("Welcome"));
 
 bot.help((ctx) => {
-  ctx.reply("Send /help to receive a greeting");
-  ctx.reply("Send /coin to receive a message with a list of availables coins");
-  ctx.reply("Send /quit to stop the bot");
+  bot.telegram.sendMessage(
+    ctx.chat.id,
+    `Send <b>/help</b> to receive a greeting`,
+    {
+      parse_mode: "HTML",
+    }
+  );
+  bot.telegram.sendMessage(
+    ctx.chat.id,
+    `Send   <b>Coin</b> to receive a message with a list of availables coins`,
+    {
+      parse_mode: "HTML",
+    }
+  );
+  bot.telegram.sendMessage(ctx.chat.id, `Send <b>Quit</b> to stop the bot`, {
+    parse_mode: "HTML",
+  });
 });
-bot.hears("/coin", (ctx) => {
+
+bot.hears("Coin", (ctx) => {
   console.log(ctx.from);
   let coinMessage = `great, here are coin to choose from ?`;
   ctx.deleteMessage();
@@ -134,7 +149,7 @@ bot.hears("decentraland", (ctx) => {
     .then(function () {});
 });
 
-bot.hears("timer", (ctx) => {
+bot.hears("Timer", (ctx) => {
   ctx.reply("⏳ Getting data");
   scheduler.scheduleJob("timer", "*/1 * * * *", () => {
     axios
@@ -161,7 +176,7 @@ bot.hears("timer", (ctx) => {
   });
 });
 
-bot.hears("/quit", (ctx) => {
+bot.hears("Quit", (ctx) => {
   ctx.reply("⛔ Ending the Job ");
   if (scheduler) {
     scheduler.scheduledJobs["timer"].cancel();
